@@ -21,14 +21,12 @@ def scrape_n_save(output_file, url, username, password):
     driver.get(url)
     sleep(1)
 
-    alert = Alert(driver)
-    alert.dismiss()
-    sleep(1)
+    
+    saved_documents = {}
+    cont = True
 
-    driver.refresh()
-    assert "UoD" in driver.title
-
-    field = driver.find_element(By.NAME, "Username")
+    # login
+    field = driver.find_element(By.NAME, "UserName")
     field.clear()
     field.send_keys(base64.b64decode(username).decode("utf-8"))
     sleep(1)
@@ -38,25 +36,71 @@ def scrape_n_save(output_file, url, username, password):
     field.send_keys(base64.b64decode(password).decode("utf-8"))
     sleep(1)
 
-    field = driver.find_element(By.XPATH, "//button[@value='login']")
+    field = driver.find_element(By.ID, "submitButton")
     field.click()
-    sleep(10)
-
-    field = driver.find_element(By.TAG_NAME, "Pre")
-    assert type(field.text) == str
-    json_object = json.loads(field.text)
-    json_object = json.dumps(json_object, indent=4)
-
-    with open(output_file, "x") as f:
-        f.write(json_object)
-
-    driver.close()
+    sleep(1)
 
 
+    # getting elements folder
+    elements = driver.find_elements(By.CLASS_NAME, 'ms-Link')
+    
+    for element in elements:
+        saved_documents[element.get_attribute("title")] = element.get_attribute("href")
+        sleep(0.5)
+
+    print("HERE: ",saved_documents)
+       
+
+
+
+    driver.back()
+
+
+
+
+    # getting specific open menu
+
+    # link = driver.find_element(By.CLASS_NAME, 'od-FieldRenderer-dot')
+    # print ("link", link)
+
+    # link.click()
+    # sleep(1)
+
+
+    # # getting link of filed
+    
+    # link = driver.find_element(By.CLASS_NAME, 'ms-ContextualMenu-itemText')
+    # print ("link", link)
+
+    # link.click()
+    # sleep(1)
+    
+
+
+
+
+
+    # field = driver.find_element(By.TAG_NAME, "Pre")
+    # assert type(field.text) == str
+    # json_object = json.loads(field.text)
+    # json_object = json.dumps(json_object, indent=4)
+
+    # with open(output_file, "x") as f:
+    #     f.write(json_object)
+
+    # driver.close()
+
+
+# pass credentials
 with open("secret/passwords.json") as f:
     data = json.load(f)
     USERNAME = data["user"]["name"]
     PASSWD = data["user"]["pass"]
-    url = "https://apl.unob.cz/rozvrh/api/read/rozvrh?id=7"
-    output_file = find_file_name()
-    scrape_n_save(output_file, url, USERNAME, PASSWD)
+
+    #pass url
+    with open("secret/url.json") as u:
+        urlData = json.load(u)
+        url = urlData["url_pred_symsmt"]
+
+        output_file = find_file_name()
+        scrape_n_save(output_file, url, USERNAME, PASSWD)
