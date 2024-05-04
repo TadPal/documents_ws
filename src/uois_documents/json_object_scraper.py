@@ -7,6 +7,8 @@ import base64
 import json
 import os
 
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 def find_file_name():
     file_name = ""
@@ -20,10 +22,6 @@ def scrape_n_save(output_file, url, username, password):
     driver = webdriver.Firefox()
     driver.get(url)
     sleep(1)
-
-    
-    saved_documents = {}
-    cont = True
 
     # login
     field = driver.find_element(By.NAME, "UserName")
@@ -41,45 +39,26 @@ def scrape_n_save(output_file, url, username, password):
     sleep(1)
 
 
-    # getting elements folder
+    # getting into element folder
     elements = driver.find_elements(By.CLASS_NAME, 'ms-Link')
-    
-    for element in elements:
-        saved_documents[element.get_attribute("title")] = element.get_attribute("href")
-        sleep(0.5)
 
-    print("HERE: ",saved_documents)
-       
+    for i in range(0, len(elements)):
+        sleep(1)
+
+        # Re-find elements
+        elements = driver.find_elements(By.CLASS_NAME, 'ms-Link')  
+        element = elements[i]
+
+        # Click on element
+        action = ActionChains(driver)
+        action.move_to_element(element).click().perform()
+
+        sleep(1)
+        driver.back()
 
 
 
     driver.back()
-
-
-
-
-    # getting specific open menu
-
-    # link = driver.find_element(By.CLASS_NAME, 'od-FieldRenderer-dot')
-    # print ("link", link)
-
-    # link.click()
-    # sleep(1)
-
-
-    # # getting link of filed
-    
-    # link = driver.find_element(By.CLASS_NAME, 'ms-ContextualMenu-itemText')
-    # print ("link", link)
-
-    # link.click()
-    # sleep(1)
-    
-
-
-
-
-
     # field = driver.find_element(By.TAG_NAME, "Pre")
     # assert type(field.text) == str
     # json_object = json.loads(field.text)
