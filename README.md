@@ -1,6 +1,7 @@
 # Documents scraping from UOIS
 
 ## Milestones
+
     20.3.2024 zahájení semestru, první den.
     26.3.2024 github repozitář.
     18.4.2024 První projektový den (demonstrace vektoru dat extrahovaných ze zdroje), popis zdroje, popis zpracování vstupu.
@@ -35,12 +36,13 @@ DOCUMENTS_WS
 │       │   ...
 │
 └───scraped
-│   │   object_1.json (this file is created automatically)
+│   │   file.pdf (downloaded files)
 │   │   ...
 │
 │
 └───secret
     │   passwords.json
+    |   url.json
 
 
 ```
@@ -59,5 +61,22 @@ _[CyberChef](<https://gchq.github.io/CyberChef/#recipe=To_Base64('A-Za-z0-9%2B/%
     "name": "xxx",
     "pass": "xxx"
   }
+  "downloads_folder": "C:\\Users\\user\\Documents\\..."
 }
+```
+
+## Edit url.json
+
+```json
+[
+  {
+    "url": "https://intranet.unob.cz/dokum/predpisymsmt/Forms/AllItems.aspx"
+  },
+  {
+    "url": "https://intranet.unob.cz/dokum/predpisyrektor/Forms/AllItems.aspx"
+  },
+  {
+    "url": "https://intranet.unob.cz/dokum/OpatreniDekanu/Forms/AllItems.aspx"
+  }
+]
 ```
