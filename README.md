@@ -60,7 +60,7 @@ _[CyberChef](<https://gchq.github.io/CyberChef/#recipe=To_Base64('A-Za-z0-9%2B/%
   "user": {
     "name": "xxx",
     "pass": "xxx"
-  }
+  },
   "downloads_folder": "C:\\Users\\user\\Documents\\..."
 }
 ```

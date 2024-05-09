@@ -54,7 +54,6 @@ def scrape_n_save(url, username, password, downloads_folder=""):
                     sleep(2)
 
                     # Switch to the file tab
-                    print(driver.window_handles)
                     driver.switch_to.window(driver.window_handles[-1])
 
                     # Switch to iframe and click the download button
