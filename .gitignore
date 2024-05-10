@@ -10,6 +10,8 @@ __pycache__/
 secret
 passwords.*
 scraped
+test_pdf
+
 
 # Distribution / packaging
 .Python

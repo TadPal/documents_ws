@@ -13,6 +13,7 @@
 
 ```bash
 mkdir scraped
+mkdir test_pdf
 
 mkdir secret
 touch passwords.json
@@ -30,14 +31,25 @@ DOCUMENTS_WS
 │   │
 │   │
 │   │
-│   └───uois_documents
-│       │   json_object_scraper.py
-│       │   ...
-│       │   ...
+│   |───uois_documents
+│   | 
+|   │   main.py
+│   |    │   ...
+│   |    │   ...
+|   |
+│   └───dspace_documents
+|
+│        │   AddBitstreamsItem.py
+│        │   ...
+│        │   ...
 │
 └───scraped
 │   │   file.pdf (downloaded files)
 │   │   ...
+|
+└───test_pdf
+|   │   file.pdf (fake pdf for upload)
+|   │   ...
 │
 │
 └───secret
