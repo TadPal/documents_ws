@@ -9,12 +9,11 @@
     10.6.2024 Třetí projektový den, prezentace komplexní funkcionality včetně plnění GQL endpointu.
     12.6.2024 Poslední možnost náhrad.
 
-## Create 2 new folders in the root folder
+## Create new folders and file in the root folder
 
 ```bash
 mkdir scraped
 mkdir test_pdf
-
 mkdir secret
 touch passwords.json
 ```
